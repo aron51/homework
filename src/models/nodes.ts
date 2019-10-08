@@ -1,5 +1,5 @@
 export interface Nodes {
-    [key: string]: {
-        dependency?: string;
-    }
+  [key: string]: {
+    dependency?: string
+  };
 }
