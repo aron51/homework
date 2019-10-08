@@ -1,13 +1,9 @@
-import * as fs from 'fs';
-import * as readLine from 'readline'
-
-const readFile = (fileName: string): void => {
-    const reader = readLine.createInterface(fs.createReadStream(fileName))
-
-    reader.on('line', (line: string) => {
-       console.log(line.split('=>'))
-    })
-}
+import {createNodes, processNodes} from './traversal';
+import {readFileLineByLine} from './utils/file-reader';
 
 
-readFile('data.txt');
+readFileLineByLine('data.txt')
+.then(createNodes)
+.then(nodes => processNodes(Object.keys(nodes), nodes))
+.then(console.log)
+.catch(console.error);
