@@ -7,7 +7,7 @@ export class TopologicalSort {
     this.stack = [];
   }
 
-  private sort(node: Node) {
+  private visit(node: Node) {
     node.visited = true;
 
     node.neighbours.forEach(neighbour => {
@@ -15,7 +15,7 @@ export class TopologicalSort {
         throw new Error('Cyclical dependency was detected!');
       }
 
-      this.sort(neighbour);
+      this.visit(neighbour);
     });
 
     this.stack.push(node);
@@ -24,7 +24,7 @@ export class TopologicalSort {
   public topologicalSort(graph: Node[]): Node[] {
     graph.forEach(node => {
       if (!node.visited) {
-        this.sort(node);
+        this.visit(node);
       }
     });
 
