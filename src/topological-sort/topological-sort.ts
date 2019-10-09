@@ -1,4 +1,5 @@
-import { Node } from './models';
+import { NodeStatus } from '../enums';
+import { Node } from '../models';
 
 export class TopologicalSort {
   private stack: Node[];
@@ -7,23 +8,24 @@ export class TopologicalSort {
     this.stack = [];
   }
 
-  private visit(node: Node) {
-    node.visited = true;
+  private visit(node: Node): void {
+    node.status = NodeStatus.PROCESSING;
 
     node.neighbours.forEach(neighbour => {
-      if (neighbour.visited) {
+      if (neighbour.status === NodeStatus.UNPROCESSED) {
+        this.visit(neighbour);
+      } else if (neighbour.status === NodeStatus.PROCESSING) {
         throw new Error('Cyclical dependency was detected!');
       }
-
-      this.visit(neighbour);
     });
 
+    node.status = NodeStatus.PROCESSED;
     this.stack.push(node);
   }
 
   public topologicalSort(graph: Node[]): Node[] {
     graph.forEach(node => {
-      if (!node.visited) {
+      if (node.status === NodeStatus.UNPROCESSED) {
         this.visit(node);
       }
     });

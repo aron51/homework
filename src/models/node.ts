@@ -1,11 +1,13 @@
+import { NodeStatus } from "../enums";
+
 export class Node {
     label: string;
-    visited: boolean;
+    status: NodeStatus;
     neighbours: Node[];
   
     constructor(label: string) {
       this.label = label;
-      this.visited = false;
+      this.status = NodeStatus.UNPROCESSED;
       this.neighbours = [];
     }
   

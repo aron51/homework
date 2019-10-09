@@ -1,21 +1,16 @@
 import { TopologicalSort } from './topological-sort';
-import { Node } from './models/node';
+import { Node } from './models';
+import { createNodeArrayFromLines, readFileLineByLine } from './utils';
 
-const n1 = new Node('X');
-const n2 = new Node('Y');
-const n3 = new Node('Z')
+const sortItems = (nodes: Node[]): Node[] => {
+  const topologicalSort = new TopologicalSort();
 
-n2.addNeighbour(n3);
+  return topologicalSort.topologicalSort(nodes);
+};
 
-
-const graph = [n1,n2,n3];
-
-const t = new TopologicalSort()
-
-try {
-    const result = t.topologicalSort(graph);
-
-    console.log(result);
-}catch(error) {
-    console.error(error);
-}
+readFileLineByLine('data.txt')
+  .then(createNodeArrayFromLines)
+  .then(sortItems)
+  .then(sortedNodes => sortedNodes.map(node => node.label))
+  .then(console.log)
+  .catch(console.error);

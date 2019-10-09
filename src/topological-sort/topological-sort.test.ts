@@ -1,5 +1,5 @@
-import { Node } from './models';
 import { TopologicalSort } from './topological-sort';
+import { Node } from '../models';
 
 describe('TopologicalSort', () => {
   let topologicalSort: TopologicalSort;
