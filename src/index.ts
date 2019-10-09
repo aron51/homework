@@ -2,7 +2,7 @@ import { TopologicalSort } from './topological-sort';
 import { Node } from './models';
 import { createNodeArrayFromLines, readFileLineByLine } from './utils';
 
-const sortItems = (nodes: Node[]): Node[] => {
+const sortNodes = (nodes: Node[]): Node[] => {
   const topologicalSort = new TopologicalSort();
 
   return topologicalSort.topologicalSort(nodes);
@@ -10,7 +10,7 @@ const sortItems = (nodes: Node[]): Node[] => {
 
 readFileLineByLine('data.txt')
   .then(createNodeArrayFromLines)
-  .then(sortItems)
+  .then(sortNodes)
   .then(sortedNodes => sortedNodes.map(node => node.label))
   .then(console.log)
   .catch(console.error);
