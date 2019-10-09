@@ -6,7 +6,7 @@ export const createNodeArrayFromLines = (lines: string[]): Node[] => {
 
     lines.forEach(line => {
         const label = line.split(SEPARATOR)[0].trim();
-        
+
         nodes.set(label, new Node(label));
     })
 
@@ -24,5 +24,6 @@ export const createNodeArrayFromLines = (lines: string[]): Node[] => {
             nodes.set(label, node);
         }
     })
+
     return Array.from(nodes.values());
 }

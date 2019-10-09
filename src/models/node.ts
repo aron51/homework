@@ -14,5 +14,4 @@ export class Node {
     public addNeighbour(node: Node): void {
       this.neighbours.push(node);
     }
-  }
-  
+}

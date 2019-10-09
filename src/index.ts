@@ -6,7 +6,7 @@ const sortNodes = (nodes: Node[]): Node[] => {
   const topologicalSort = new TopologicalSort();
 
   return topologicalSort.topologicalSort(nodes);
-};
+}
 
 readFileLineByLine('data.txt')
   .then(createNodeArrayFromLines)
